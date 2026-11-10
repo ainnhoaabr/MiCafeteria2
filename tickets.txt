@@ -46,3 +46,25 @@ Productos:
 Total: 5,30 €
 ==============================
 
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 1
+Cliente: lidia
+Camarero: Carlos - Código: C01
+Productos:
+1. Bocadillo caliente - 3,50 € - IVA: 10,00 % * 2,  10.0% , 0.7000000000000001 = Total línea: 7,70 €
+Total: 7,70 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 1
+Cliente: Lidia
+Camarero: Carlos - Código: C01
+Productos:
+1. Zumo grande - 2,20 € - IVA: 10,00 % * 1,  10.0% , 0.22000000000000003 = Total línea: 2,42 €
+Total: 2,42 €
+==============================
+

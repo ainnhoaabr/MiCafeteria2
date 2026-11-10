@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Representa una venta de la cafetería.
  *
@@ -13,9 +15,9 @@ public class Ticket {
     private final int numeroTicket;
     private Cliente cliente;
     private Camarero camarero;
-    private Producto[] productos;
-    private int[] cantidades;
-    private int contadorProductos;
+    private ArrayList<Producto>productos;
+    private ArrayList<Integer>cantidades;
+
 
     /**
      * Crea un ticket con una capacidad máxima de productos.
@@ -34,9 +36,8 @@ public class Ticket {
             capacidadMaxima = 1;
         }
 
-        this.productos = new Producto[capacidadMaxima];
-        this.cantidades = new int[capacidadMaxima];
-        this.contadorProductos = 0;
+        this.productos = new ArrayList<>();
+        this.cantidades = new ArrayList<>();
     }
 
     public int getNumeroTicket() {
@@ -59,12 +60,12 @@ public class Ticket {
         this.camarero = camarero;
     }
 
-    public Producto[] getProductos() {
+    public ArrayList<Producto> getProductos() {
         return productos;
     }
 
     public int getContadorProductos() {
-        return contadorProductos;
+        return productos.size();
     }
 
     /**
@@ -77,14 +78,8 @@ public class Ticket {
             return false;
         }
 
-        if (contadorProductos >= productos.length) {
-            System.out.println("No se pueden añadir más productos al ticket.");
-            return false;
-        }
-
-        productos[contadorProductos] = producto;
-        cantidades[contadorProductos] = cantidad;
-        contadorProductos++;
+        productos.add(producto);
+        cantidades.add(cantidad);
         return true;
     }
 
@@ -95,13 +90,23 @@ public class Ticket {
     public double calcularTotal() {
         double total = 0;
 
-        for (int i = 0; i < contadorProductos; i++) {
-            total += (productos[i].getPrecio() * (1+(productos[i].getIVA()/100)))* cantidades[i];
+        for (int i = 0; i < productos.size(); i++) {
+            total += (productos.get(i).getPrecio() * (1+(productos.get(i).getIVA()/100)))* cantidades.get(i);
         }
 
         return total;
     }
 
+    public void eliminarProducto(int indice){
+        if (indice < 0 || indice >= productos.size()){
+            System.out.println("No válido");
+            return;
+        }
+        productos.remove(indice);
+        cantidades.remove(indice);
+
+        System.out.println("Producto eliminado.");
+    }
     /**
      * Devuelve el ticket completo como texto.
      *
@@ -134,19 +139,19 @@ public class Ticket {
 
         texto.append("Productos:\n");
 
-        if (contadorProductos == 0) {
+        if (productos.isEmpty()) {
             texto.append("No hay productos en el ticket.\n");
         } else {
-            for (int i = 0; i < contadorProductos; i++) {
-                double ivaLinea= (productos[i].getIVA()/100) * productos[i].getPrecio() * cantidades[i];
-                double totalLinea= (productos[i].getPrecio() * cantidades[i]) + ivaLinea;
+            for (int i = 0; i < productos.size(); i++) {
+                double ivaLinea= (productos.get(i).getIVA()/100) * productos.get(i).getPrecio() * cantidades.get(i);
+                double totalLinea= (productos.get(i).getPrecio() * cantidades.get(i)) + ivaLinea;
                 texto.append(i + 1)
                         .append(". ")
-                        .append(productos[i].mostrarInformacion())
+                        .append(productos.get(i).mostrarInformacion())
                         .append(" * ")
-                        .append(cantidades[i])
+                        .append(cantidades.get(i))
                         .append(",  ")
-                        .append(productos[i].getIVA())
+                        .append(productos.get(i).getIVA())
                         .append("% ")
                         .append(", " )
                         .append(ivaLinea)
@@ -161,6 +166,7 @@ public class Ticket {
 
         return texto.toString();
     }
+
 
     /**
      * Muestra por consola toda la información del ticket.

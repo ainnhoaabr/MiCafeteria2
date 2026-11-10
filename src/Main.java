@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -84,6 +85,9 @@ public class Main {
                     gestorTickets.mostrarTicketsGuardados();
                     break;
 
+                case 8:
+                    eliminarProductoDelTicket(teclado, ticketActual);
+
                 case 0:
                     if (ticketActual.getContadorProductos() > 0) {
                         System.out.println("ATENCIÓN: el ticket actual tiene productos "
@@ -119,6 +123,7 @@ public class Main {
         System.out.println("5. Consultar total actual");
         System.out.println("6. Finalizar y guardar ticket");
         System.out.println("7. Ver tickets guardados");
+        System.out.println("8. Eliminar producto del ticket.");
         System.out.println("0. Salir");
         System.out.println("================================");
     }
@@ -184,7 +189,28 @@ public class Main {
         }
     }
 
-    /**
+    private static void eliminarProductoDelTicket(Scanner teclado, Ticket ticket) {
+
+        ArrayList<Producto> productos = ticket.getProductos();
+
+        if (productos.isEmpty()) {
+            System.out.println("No hay productos en el ticket.");
+            return;
+        }
+
+        for (int i = 0; i < productos.size(); i++) {
+            System.out.println((i + 1) + ". " + productos.get(i).mostrarInformacion());
+        }
+
+        int numeroProducto = leerEntero(teclado, "¿Que producto quieres eliminar?");
+        if (numeroProducto < 1 || numeroProducto > productos.size()) {
+            System.out.println("Número no válido.");
+            return;
+        }
+
+        ticket.eliminarProducto(numeroProducto-1);
+
+    }    /**
      * Aplica un descuento a un producto para demostrar la interfaz
      * Descontable. Igual que en la versión anterior, el descuento se calcula
      * y se muestra, pero no modifica el precio original del catálogo.
@@ -198,10 +224,10 @@ public class Main {
 
         System.out.println("\n--- PRODUCTOS DEL TICKET ---");
 
-        Producto[] productos = ticket.getProductos();
+        ArrayList<Producto> productos = ticket.getProductos();
 
         for (int i = 0; i < ticket.getContadorProductos(); i++) {
-            System.out.println((i + 1) + ". " + productos[i].mostrarInformacion());
+            System.out.println((i + 1) + ". " + productos.get(i).mostrarInformacion());
         }
 
         int numeroProducto = leerEntero(teclado,
@@ -220,7 +246,7 @@ public class Main {
             return;
         }
 
-        Producto producto = productos[numeroProducto - 1];
+        Producto producto = productos.get(numeroProducto - 1);
         Descontable descontable = producto;
         double precioConDescuento = descontable.aplicarDescuento(porcentaje);
 
