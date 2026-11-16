@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -14,22 +16,39 @@ public class Main {
         // El camarero será el mismo durante esta ejecución del programa.
         Camarero camarero = new Camarero("Carlos", "C01");
 
-        Producto[] catalogo = {
-                new Bebida("Café", 1.80, "Bebida", 10, "mediano"),
-                new Comida("Bocadillo", 3.50, "Comida", 10, true),
-                new Bebida("Zumo", 2.20, "Bebida", 10,"grande"),
-                new Producto("Galleta", 1.00, "Dulce", 10),
-                new Comida("Croissant", 1.70, "Comida", 10,false)
-        };
+        Producto[] catalogo;
+        try {
+            catalogo = new Producto[]{
+                    new Bebida("Café", 1.80, "Bebida", 10, "mediano"),
+                    new Comida("Bocadillo", 3.50, "Comida", 10, true),
+                    new Bebida("Zumo", 2.20, "Bebida", 10, "grande"),
+                    new Producto("Galleta", 1.00, "Dulce", 10),
+                    new Comida("Croissant", 1.70, "Comida", 10, false)
+            };
+        }catch (IllegalArgumentException e){
+            System.out.println("Error: " + e.getMessage());
+            return;
+        }
+
 
         System.out.println(catalogo[1].mostrarInformacion());
 
+        GestorProductos gestor  = new GestorProductos();
+
+        gestor.agregarProducto("Bebida", catalogo[0]);
+        gestor.agregarProducto("Comida", catalogo[1]);
+        gestor.agregarProducto("Bebida", catalogo[2]);
+        gestor.agregarProducto("Dulce", catalogo[3]);
+        gestor.agregarProducto("Comida", catalogo[4]);
+        gestor.mostrarProductosPorCategoria();
         // Esta clase se encarga del archivo donde guardamos el historial.
         GestorTickets gestorTickets = new GestorTickets();
 
+        Queue<Ticket> ticketsPendientes = new LinkedList<>();
+
         System.out.println("=== NUEVO TICKET ===");
         Cliente cliente = crearCliente(teclado);
-        Ticket ticketActual = new Ticket(cliente, camarero, 10);
+        Ticket ticketActual = new Ticket(cliente, camarero);
 
         int opcion;
 
@@ -65,13 +84,17 @@ public class Main {
                      * Después se crea un nuevo cliente y un nuevo Ticket.
                      */
                     if (gestorTickets.guardarTicket(ticketActual)) {
+                        ticketsPendientes.offer(ticketActual);
                         System.out.println("Ticket nº "
                                 + ticketActual.getNumeroTicket()
                                 + " guardado correctamente.");
 
+                        ExportJSON exportador = new ExportJSON();
+                        exportador.exportarTicket(ticketActual);
+
                         System.out.println("\n=== NUEVO TICKET ===");
                         cliente = crearCliente(teclado);
-                        ticketActual = new Ticket(cliente, camarero, 10);
+                        ticketActual = new Ticket(cliente, camarero);
 
                         System.out.println("Nuevo ticket nº "
                                 + ticketActual.getNumeroTicket()
@@ -87,6 +110,11 @@ public class Main {
 
                 case 8:
                     eliminarProductoDelTicket(teclado, ticketActual);
+                    break;
+
+                case 9:
+                    atenderTicket(ticketsPendientes);
+                    break;
 
                 case 0:
                     if (ticketActual.getContadorProductos() > 0) {
@@ -107,6 +135,9 @@ public class Main {
         teclado.close();
     }
 
+
+
+
     /**
      * Muestra las opciones principales e indica qué ticket está abierto.
      */
@@ -124,6 +155,7 @@ public class Main {
         System.out.println("6. Finalizar y guardar ticket");
         System.out.println("7. Ver tickets guardados");
         System.out.println("8. Eliminar producto del ticket.");
+        System.out.println("9. Atender siguiente ticket.");
         System.out.println("0. Salir");
         System.out.println("================================");
     }
@@ -281,5 +313,17 @@ public class Main {
                 System.out.println("Debe introducir un número válido.");
             }
         }
+    }
+
+    private static void atenderTicket(Queue<Ticket>ticketsPendientes){
+        Ticket atendido = ticketsPendientes.poll();
+
+        if (atendido == null){
+            System.out.println("No hay ningún ticket");
+            return;
+        }
+        atendido.mostrarTicket();
+
+        System.out.println("Tickets pendientes: " + ticketsPendientes.size());
     }
 }

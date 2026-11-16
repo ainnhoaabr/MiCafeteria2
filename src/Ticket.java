@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Representa una venta de la cafetería.
  *
  * Esta clase utiliza composición porque contiene un Cliente, un Camarero y
- * un array de objetos Producto.
+ * una lista de objetos Producto.
  */
 public class Ticket {
 
@@ -24,18 +24,12 @@ public class Ticket {
      *
      * @param cliente cliente asociado al ticket
      * @param camarero camarero que atiende la venta
-     * @param capacidadMaxima tamaño del array de productos
+     *
      */
-    public Ticket(Cliente cliente, Camarero camarero, int capacidadMaxima) {
+    public Ticket(Cliente cliente, Camarero camarero) {
         this.numeroTicket = siguienteNumero++;
         this.cliente = cliente;
         this.camarero = camarero;
-
-        // Validación mediante condicional: la capacidad mínima será 1.
-        if (capacidadMaxima <= 0) {
-            capacidadMaxima = 1;
-        }
-
         this.productos = new ArrayList<>();
         this.cantidades = new ArrayList<>();
     }
@@ -64,6 +58,10 @@ public class Ticket {
         return productos;
     }
 
+    public ArrayList<Integer> getCantidades() {
+        return cantidades;
+    }
+
     public int getContadorProductos() {
         return productos.size();
     }
@@ -74,7 +72,7 @@ public class Ticket {
      * @return true si se añade correctamente; false en caso contrario
      */
     public boolean agregarProducto(Producto producto, int cantidad) {
-        if (producto == null || cantidad == 0) {
+        if (producto == null || cantidad <= 0) {
             return false;
         }
 
@@ -94,7 +92,7 @@ public class Ticket {
             total += (productos.get(i).getPrecio() * (1+(productos.get(i).getIVA()/100)))* cantidades.get(i);
         }
 
-        return total;
+        return Math.round(total * 100.0) / 100.0;
     }
 
     public void eliminarProducto(int indice){

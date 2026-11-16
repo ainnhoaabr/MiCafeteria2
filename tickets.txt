@@ -68,3 +68,114 @@ Productos:
 Total: 2,42 €
 ==============================
 
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 1
+Cliente: lidia
+Camarero: Carlos - Código: C01
+Productos:
+1. Zumo grande - 2,20 € - IVA: 10,00 % * 1,  10.0% , 0.22000000000000003 = Total línea: 2,42 €
+2. Bocadillo caliente - 3,50 € - IVA: 10,00 % * 1,  10.0% , 0.35000000000000003 = Total línea: 3,85 €
+Total: 6,27 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 1
+Cliente: Lidia
+Camarero: Carlos - Código: C01
+Productos:
+1. Galleta - 1,00 € - Categoría: Dulce - Iva: 10,00 * 1,  10.0% , 0.1 = Total línea: 1,10 €
+Total: 1,10 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 2
+Cliente: ainhoa
+Camarero: Carlos - Código: C01
+Productos:
+1. Galleta - 1,00 € - Categoría: Dulce - Iva: 10,00 * 1,  10.0% , 0.1 = Total línea: 1,10 €
+Total: 1,10 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 3
+Cliente: juanma
+Camarero: Carlos - Código: C01
+Productos:
+1. Café mediano - 1,80 € - IVA: 10,00 % * 4,  10.0% , 0.7200000000000001 = Total línea: 7,92 €
+Total: 7,92 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 1
+Cliente: liida
+Camarero: Carlos - Código: C01
+Productos:
+1. Zumo grande - 2,20 € - IVA: 10,00 % * 1,  10.0% , 0.22000000000000003 = Total línea: 2,42 €
+Total: 2,42 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 1
+Cliente: ainhoa
+Camarero: Carlos - Código: C01
+Productos:
+1. Croissant frío - 1,70 € - IVA: 10,00 % * 2,  10.0% , 0.34 = Total línea: 3,74 €
+Total: 3,74 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 1
+Cliente: lidia
+Camarero: Carlos - Código: C01
+Productos:
+1. Zumo grande - 2,20 € - IVA: 10,00 % * 1,  10.0% , 0.22000000000000003 = Total línea: 2,42 €
+Total: 2,42 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 2
+Cliente: ainhoa
+Camarero: Carlos - Código: C01
+Productos:
+1. Café mediano - 1,80 € - IVA: 10,00 % * 2,  10.0% , 0.36000000000000004 = Total línea: 3,96 €
+Total: 3,96 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 3
+Cliente: juanma
+Camarero: Carlos - Código: C01
+Productos:
+1. Galleta - 1,00 € - Categoría: Dulce - Iva: 10,00 * 1,  10.0% , 0.1 = Total línea: 1,10 €
+Total: 1,10 €
+==============================
+
+==============================
+       CAFETERÍA JAVA
+==============================
+Ticket nº: 1
+Cliente: liia
+Camarero: Carlos - Código: C01
+Productos:
+1. Galleta - 1,00 € - Categoría: Dulce - Iva: 10,00 * 1,  10.0% , 0.1 = Total línea: 1,10 €
+Total: 1,10 €
+==============================
+
